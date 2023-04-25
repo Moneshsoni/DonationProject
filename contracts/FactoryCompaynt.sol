@@ -3,8 +3,8 @@ pragma solidity ^0.8.9;
 import "./Company.sol";
 
 contract CompanyFactory{
-    Company[] poblic companies;
+    Company[] public companies;
     function createCompany(address _user,string memory _name)external payable{
-
+        
     }
 }
