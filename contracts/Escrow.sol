@@ -24,12 +24,12 @@ contract Escrow is Initializable, UUPSUpgradeable, OwnableUpgradeable{
         _;
     }
 
-    function deposit()external payable onlyBuyer{
+    function deposit()external payable virtual onlyBuyer{
         require(state == ComState.Start,"Not Deliver");
         state = ComState.Deliver;
     }
 
-    function ReleaseFund()external onlyBuyer{
+    function ReleaseFund()external  virtual onlyBuyer{
         require(state==ComState.Deliver,"This is not Deliver yer");
         seller.transfer(address(this).balance);
         state = ComState.Complete;
