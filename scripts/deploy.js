@@ -1,31 +1,19 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
-// will compile your contracts, add the Hardhat Runtime Environment's members to the
-// global scope, and execute the script.
-const hre = require("hardhat");
-
+const { ethers, upgrades } = require("hardhat");
+const BUYER = "0x6FB412698FE447625D1F0E2ACeD564aD48ac5e75";
+const Seller = "0x2270E86D79c463A81254A9FA8871B6D151e792a9";
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
 
-  const lockedAmount = hre.ethers.utils.parseEther("1");
+ 
+ const Escrow = await ethers.getContractFactory("Escrow");
 
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+ console.log("Deploying Escrow...");
 
-  await lock.deployed();
+ const escrow = await upgrades.deployProxy(Escrow, [BUYER,Seller], {
+   initializer: "initialize",
+ });
+ await escrow.deployed();
 
-  console.log(
-    `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
-  );
+ console.log("escrow deployed to:", escrow.address);
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main();
