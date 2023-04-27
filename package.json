@@ -3,11 +3,14 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.2",
     "hardhat": "^2.14.0"
+<<<<<<< HEAD
+=======
   },
   "dependencies": {
     "@openzeppelin/contracts-upgradeable": "^4.8.3",
     "@openzeppelin/hardhat-upgrades": "^1.22.1",
     "dotenv": "^16.0.3",
     "hardhat-shorthand": "^1.0.0"
+>>>>>>> f1725f8ae6b0b9f1d54874dc014e32ba6aca9df9
   }
 }
