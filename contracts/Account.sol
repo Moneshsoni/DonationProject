@@ -18,7 +18,7 @@ contract Account{
     //Withdraw functions
     function Withdraw(uint amount)external{
         uint oldBalance = balance;
-        require(amount<= balance,"Underflow");
+        require(amount<= balance,"Value should be less than balance");
         balance -= amount;
         assert(balance<= oldBalance);
     }
