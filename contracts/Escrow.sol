@@ -38,6 +38,10 @@ contract Escrow is Initializable, UUPSUpgradeable, OwnableUpgradeable{
     function add(uint a,uint b)public pure returns(uint){
         return a+b;
     }
+    
+    function getBalance()public view returns(uint){
+        return address(this).balance;
+    }
 }
 
 // buyer 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2
